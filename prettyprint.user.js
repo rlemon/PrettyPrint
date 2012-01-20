@@ -12,6 +12,7 @@
 // @include       http://*.stackexchange.com/*
 // @include       http://answers.onstartups.com/*
 // @require       http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js
+// @require       https://raw.github.com/rlemon/PrettyPrint/master/printpreview.jquery.js
 // ==/UserScript==
 
 
@@ -30,8 +31,9 @@ EmbedFunctionOnPageAndExecute(function() {
 		var print_button = $('<a>', {
 			text: 'Print Preview',
 			title: 'Open Print Preview',
+			'class': 'print-preview'
 		});
-		print_button.printPreview();
 		$(this).append(print_button);
 	});
+	$('a.print-preview').printPreview();
 });
