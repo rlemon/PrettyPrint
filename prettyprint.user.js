@@ -12,14 +12,15 @@
 // @include       http://*.stackexchange.com/*
 // @include       http://answers.onstartups.com/*
 // @require       http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js
-
+// @require       https://raw.github.com/rlemon/PrettyPrint/master/print.css
 // ==/UserScript==
 
-function EmbedCodeOnPage(jcode) {
-	var script = document.createElement('script');
-	script.type = 'text/javascript';
-	script.textContent = jcode;
-	document.head.appendChild(script);
+function EmbedCodeOnPage(kode, isCSS) {
+	isCSS = typeof isCSS == 'undefined' ? false : isCSS;
+	var elm = isCSS ? document.createElement('style') : document.createElement('script');
+	elm.type = isCSS ? 'text/css' : 'text/javascript';
+	elm.textContent = kode;
+	document.head.appendChild(elm);
 }
 function EmbedFunctionOnPageAndExecute(function_contents) {
 	EmbedCodeOnPage('(' + function_contents.toString() + ')()');
@@ -86,6 +87,7 @@ EmbedFunctionOnPageAndExecute(function() {
             
             // Grab contents and apply stylesheet
             $('body', print_frame_ref).html(container.clone());
+            console.log( $('body', print_frame_ref).html() );
             $('head link[media*=print], head link[media=all]').each(function() {
                 $('head', print_frame_ref).append($(this).clone().attr('media', 'all'));
             });
