@@ -60,7 +60,7 @@ EmbedFunctionOnPageAndExecute(function() {
     var mask, size, print_modal, print_controls;
     $.printPreview = {
         loadPrintPreview: function(container) {
-			console.log(container);
+
             // Declare DOM objects
             print_modal = $('<div id="print-modal"></div>');
             print_modal.css({
@@ -174,7 +174,6 @@ EmbedFunctionOnPageAndExecute(function() {
                 else { $.printPreview.distroyPrintPreview(); }
             });
             
-            console.log(print_frame);
     	},
     	
     	distroyPrintPreview: function() {
