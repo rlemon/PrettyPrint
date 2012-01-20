@@ -63,10 +63,43 @@ EmbedFunctionOnPageAndExecute(function() {
 			console.log(container);
             // Declare DOM objects
             print_modal = $('<div id="print-modal"></div>');
+            print_modal.css({
+				'background': '#FFF',
+				'position': 'absolute',
+				'left': '50%',
+				'margin': '0 0 0 -465px',
+				'padding': '0 68px',
+				'width': '794px',
+				'box-shadow': '0 0 20px #000',
+				'-moz-box-shadow': '0 0 20px #000',
+				'-webkit-box-shadow': '0 0 10px #000'
+			});
+			        
             print_controls = $('<div id="print-modal-controls">' + 
-                                    '<a href="#" class="print" title="Print page">Print page</a>' +
-                                    '<a href="#" class="close" title="Close print preview">Close</a>').hide();
+                                    '<a href="#" class="print" title="Print page" style="color: #44f; display: block; float: left; height: 32px; text-decoration: none; width: 80px;">Print</a>' +
+                                    '<a href="#" class="close" title="Close print preview" style="color: #f44; display: block; float: left; height: 32px; text-decoration: none; width: 80px;">Close</a>').hide();
+            print_controls.css({
+				'border': '1px solid #ccc',
+				'border-radius': '8px',
+				'-webkit-border-radius': '8px',
+				'-moz-border-radius': '8px',
+				'top': '15px',
+				'left': '50%',
+				'margin': '0 0 0 -81px',
+				'position': 'fixed',
+				'padding': '5px 0',
+				'background': 'rgba(250, 250, 250, 0.75)',
+				'font-size': '200%'
+			});
             var print_frame = $('<iframe id="print-modal-content" scrolling="no" border="0" frameborder="0" name="print-frame" />');
+				print_frame.css({
+					'margin': '68px 0 ',
+					'border': 'none ',
+					'height': '100% ',
+					'overflow': 'hidden ',
+					'display': 'block ',
+					'width': '100% '
+				})
 
             // Raise print preview window from the dead, zooooooombies
             print_modal
@@ -86,7 +119,8 @@ EmbedFunctionOnPageAndExecute(function() {
             print_frame_ref.close();
             
             // Grab contents and apply stylesheet
-            $('body', print_frame_ref).html(container.clone());
+            
+            $('body', print_frame_ref).html(container.clone()).find('.votecell, .fw, .comments-link, .print-preview').remove();
             $('head link[media*=print], head link[media=all]').each(function() {
                 $('head', print_frame_ref).append($(this).clone().attr('media', 'all'));
             });
