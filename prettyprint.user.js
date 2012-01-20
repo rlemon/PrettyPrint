@@ -11,7 +11,7 @@
 // @include       http://*stackapps.com/*
 // @include       http://*.stackexchange.com/*
 // @include       http://answers.onstartups.com/*
-// @require       http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js
+// @require       http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js
 // @require       https://raw.github.com/rlemon/PrettyPrint/master/print.css
 // ==/UserScript==
 
@@ -87,7 +87,6 @@ EmbedFunctionOnPageAndExecute(function() {
             
             // Grab contents and apply stylesheet
             $('body', print_frame_ref).html(container.clone());
-            console.log( $('body', print_frame_ref).html() );
             $('head link[media*=print], head link[media=all]').each(function() {
                 $('head', print_frame_ref).append($(this).clone().attr('media', 'all'));
             });
@@ -140,6 +139,8 @@ EmbedFunctionOnPageAndExecute(function() {
                 if ($(this).hasClass('print')) { window.print(); }
                 else { $.printPreview.distroyPrintPreview(); }
             });
+            
+            console.log(print_frame);
     	},
     	
     	distroyPrintPreview: function() {
@@ -175,7 +176,7 @@ EmbedFunctionOnPageAndExecute(function() {
 
     		mask.css({display: 'block'}).fadeTo('400', 0.75);
     		
-            $(window).bind("resize..printPreview.mask", function() {
+            $(window).bind("resize.printPreview.mask", function() {
 				$.printPreview.updateMaskSize();
 			});
 
